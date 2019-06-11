@@ -28,23 +28,6 @@ pip install asyncurl
 ## Usage
 if you want asyncurl, you have to import like this.
 
-from asyncurl.asyncurl_fetch import AsyncURLFetch
-import time
-
-ac_fetch = AsyncURLFetch()
-print(ac_fetch)
-
-urls = [
-    "http://google.com",
-    "http://google.com",
-    "http://google.com"
-]
-
-start_time = time.time()
-print(ac_fetch.parallel(urls).results)
-end_time = time.time()
-print(end_time - start_time)
-
 ```python
 from asyncurl.asyncurl_fetch import AsyncURLFetch
 
