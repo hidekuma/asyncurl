@@ -36,7 +36,7 @@ ac_fetch = AsyncURLFetch()
 
 Default worker's count is 2. you can change it if you want.
 ```python
-ac.worker = 3
+ac_fetch.worker = 3
 ```
 
 and you can fetch urls.
