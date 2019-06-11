@@ -1,6 +1,6 @@
 import collections
 import requests
-from asyncurl.asyncurl_base import AsyncURLBase, asyncio, uvloop
+from asyncurl.base import AsyncURLBase, asyncio, uvloop
 
 class AsyncURLFetch(AsyncURLBase):
     def __init__(self):

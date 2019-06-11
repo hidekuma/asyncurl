@@ -1,7 +1,7 @@
 import unittest
 import requests
 from collections.abc import Iterable
-from asyncurl.asyncurl_fetch import AsyncURLFetch
+from asyncurl.fetch import AsyncURLFetch
 
 TEST_URLS = [
     'http://localhost',

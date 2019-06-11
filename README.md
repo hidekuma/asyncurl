@@ -46,7 +46,7 @@ end_time = time.time()
 print(end_time - start_time)
 
 ```python
-from asyncurl.asyncurl_fetch import AsyncURLFetch
+from asyncurl.fetch import AsyncURLFetch
 
 ac_fetch = AsyncURLFetch()
 ```

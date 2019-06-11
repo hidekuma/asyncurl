@@ -1,5 +1,5 @@
 import unittest
-from asyncurl.asyncurl_base import AsyncURLBase
+from asyncurl.base import AsyncURLBase
 
 class AsnyncURLBaseTest(unittest.TestCase):
     def test_instance(self):
