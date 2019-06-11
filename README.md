@@ -40,6 +40,11 @@ ac.worker = 3
 
 and you can fetch urls.
 ```python
+urls = [
+  "http://localhost",
+  "http://localhost",
+  "http://localhost"
+]
 ac.parallel_fetch(urls)
 ```
 `parallel_fetch` function which can return list of request class. just like this.
