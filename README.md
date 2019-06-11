@@ -17,6 +17,7 @@ asyncurl project consists of the following packages:
 - `asyncio`
 - `requests` (not `pycurl`)
 - `uvloop`
+
 You can [download asyncurl executable](https://github.com/hidden-function/asyncurl/releases).
 
 ### Using pip
@@ -39,6 +40,11 @@ ac.worker = 3
 
 and you can fetch urls.
 ```python
+urls = [
+  "http://localhost",
+  "http://localhost",
+  "http://localhost"
+]
 ac.parallel_fetch(urls)
 ```
 `parallel_fetch` function which can return list of request class. just like this.
