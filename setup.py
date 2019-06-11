@@ -17,4 +17,4 @@ setup(name='asyncurl',
         'uvloop>=0.12.2'
       ],
       python_requires = '>=3.6',
-      test_suite='')
+      test_suite='tests')
