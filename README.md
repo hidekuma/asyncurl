@@ -5,6 +5,11 @@ Asynchronous cURL Requests
 
 ---
 ## Dependencies
+asyncurl project consists of the following packages:
+- `asyncio`
+- `requests` (not `pycurl`)
+- `uvloop`
+
 | Package  | Version  | Description |
 | :-:      | :-:      | :-:         |
 | python   | >=3.6    |             |
@@ -13,11 +18,6 @@ Asynchronous cURL Requests
 | uvloop   | >=0.12.2 |             |
 
 ## Installation
-asyncurl project consists of the following packages:
-- `asyncio`
-- `requests` (not `pycurl`)
-- `uvloop`
-
 You can [download asyncurl executable](https://github.com/hidden-function/asyncurl/releases).
 
 ### Using pip
