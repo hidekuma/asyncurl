@@ -27,10 +27,28 @@ pip install asyncurl
 
 ## Usage
 if you want asyncurl, you have to import like this.
-```python
-from asyncurl import asyncurl
 
-ac = asyncurl.AsyncURL()
+from asyncurl.asyncurl_fetch import AsyncURLFetch
+import time
+
+ac_fetch = AsyncURLFetch()
+print(ac_fetch)
+
+urls = [
+    "http://google.com",
+    "http://google.com",
+    "http://google.com"
+]
+
+start_time = time.time()
+print(ac_fetch.parallel(urls).results)
+end_time = time.time()
+print(end_time - start_time)
+
+```python
+from asyncurl.asyncurl_fetch import AsyncURLFetch
+
+ac_fetch = AsyncURLFetch()
 ```
 
 Default worker's count is 2. you can change it if you want.
@@ -45,11 +63,11 @@ urls = [
   "http://localhost",
   "http://localhost"
 ]
-ac.parallel_fetch(urls)
+ac_fetch.parallel(urls)
 ```
 `parallel_fetch` function which can return list of request class. just like this.
 ```python
-ac.parallel_fetch(urls).results
+ac_fetch.parallel(urls).results
 ```
 The function's the order of result is nonsequential
 
@@ -57,29 +75,20 @@ The function's the order of result is nonsequential
 ```python
 # case.1) with callback
 print('-------- [with callback] ----------')
-asycurl.parallel_fetch(urls, callback=lambda x: print('with callback : {0}'.format(x)))
+ac_fetch.parallel(urls, callback=lambda x: print('with callback : {0}'.format(x)))
 
 # case.2) return results
 print('-------- [return results] ----------')
-print(asycurl.parallel_fetch(urls).results)
-
-# case.3) print results for check
-print('-------- [print results] ----------')
-asycurl.parallel_fetch(urls).print_results()
+print(ac_fetch.parallel(urls).results)
 
 >>>
 -------- [with callback] ----------
 with callback : <Future finished result=<Response [403]>>
 with callback : <Future finished result=<Response [403]>>
 with callback : <Future finished result=<Response [403]>>
-with callback : <Future finished result=<Response [403]>>
+
 -------- [return results] ----------
-[<Response [403]>, <Response [403]>, <Response [403]>, <Response [403]>]
--------- [print results] ----------
-print_result: http://localhost/
-print_result: http://localhost/
-print_result: http://localhost/
-print_result: http://localhost/
+[<Response [403]>, <Response [403]>, <Response [403]>]
 ```
 
 [License](LICENSE)
