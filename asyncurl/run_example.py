@@ -1,4 +1,4 @@
-import AsyncURL
+import asyncurl
 
 if __name__ == "__main__":
     urls = [
@@ -8,16 +8,16 @@ if __name__ == "__main__":
         'http://localhost',
     ]
 
-    asyncurl = AsyncURL.asyncurl()
+    asycurl = asyncurl.AsyncURL()
 
     # case.1) with callback
     print('-------- [with callback] ----------')
-    asyncurl.parallel_fetch(urls, callback=lambda x: print('with callback : {0}'.format(x)))
+    asycurl.parallel_fetch(urls, callback=lambda x: print('with callback : {0}'.format(x)))
  
     # case.2) return results
     print('-------- [return results] ----------')
-    print(asyncurl.parallel_fetch(urls).results)
+    print(asycurl.parallel_fetch(urls).results)
 
     # case.3) print results for check
     print('-------- [print results] ----------')
-    asyncurl.parallel_fetch(urls).print_results()
+    asycurl.parallel_fetch(urls).print_results()
