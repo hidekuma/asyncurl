@@ -3,8 +3,19 @@ import asyncio, uvloop
 class AsyncURLBase:
     def __init__(self):
         self._worker = 2
+        self._limit = asyncio.Semaphore(2)
         self._results = []
         asyncio.set_event_loop_policy(uvloop.EventLoopPolicy())
+
+    def __getattr__(self, name):
+        # print('__getattr__ is called', name)
+        if name == 'queue':
+            """
+            - initialize queue only parallel
+            """
+            value = asyncio.Queue()
+            setattr(self, name, value)
+            return value
 
     @property
     def worker(self):
@@ -17,6 +28,16 @@ class AsyncURLBase:
         self._worker = worker
 
     @property
+    def limit(self):
+        return self._limit
+
+    @limit.setter
+    def limit(self, limit):
+        if limit <= 0:
+            raise ValueError("%f limit must be > 0." % limit)
+        self._limit = asyncio.Semaphore(limit)
+
+    @property
     def results(self):
         """
         - results get only.
@@ -24,7 +45,6 @@ class AsyncURLBase:
         if not self._results:
             raise ValueError('Result is empty now.')
         return self._results
-
 
 #from collections.abc import AsyncIterator
 #class CoreIter(AsyncIterator):

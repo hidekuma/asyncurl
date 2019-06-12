@@ -27,5 +27,12 @@ class AsyncURLFetchTest(unittest.TestCase):
         fetch = AsyncURLFetch()
         fetch.parallel(TEST_URLS, callback=lambda x: print('with callback : {0}'.format(x)))
 
+    def test_parallel_fetch_with_queue(self):
+        print('-------- [with queue] ----------')
+        fetch = AsyncURLFetch()
+        results = fetch.parallel(TEST_URLS, queue=True).results
+        print(results)
+        self.assertIsInstance(results, Iterable)
+
 if __name__ == '__main__':
     unittest.main()
