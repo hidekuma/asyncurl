@@ -1,4 +1,4 @@
-# asyncurl
+# asyncurl <img src="https://api.travis-ci.org/hidden-function/asyncurl.svg?branch=master" alt="travis-ci-build-result"> 
 Asynchronous cURL Requests
 
 <img src="https://raw.githubusercontent.com/hidden-function/i/master/asyncurl.png" width="50%" alt="asyncurl-logo"> 
