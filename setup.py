@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='asyncurl',
-      version='0.1.4',
+      version='0.1.5',
       url='https://github.com/hidden-function/asyncurl',
       license='MIT',
       author='Hidekuma',
