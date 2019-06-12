@@ -4,18 +4,17 @@ Asynchronous cURL Requests
 <img src="https://raw.githubusercontent.com/hidden-function/i/master/asyncurl.png" width="50%" alt="asyncurl-logo"> 
 
 ---
+## Support python versions
+python >= 3.6
+
 ## Dependencies
 asyncurl project consists of the following packages:
-- `asyncio`
-- `requests` (not `pycurl`)
-- `uvloop`
 
-| Package  | Version  | Description |
-| :-:      | :-:      | :-:         |
-| python   | >=3.6    |             |
-| asyncio  | >=3.4.3  |             |
-| requests | >=2.22.0 |             |
-| uvloop   | >=0.12.2 |             |
+| Package  | Version  | Description           |
+| :-:      | :-:      | :-:                   |
+| asyncio  | >=3.4.3  | Asynchronous          |
+| requests | >=2.22.0 | pycurl substitutes    |
+| uvloop   | >=0.12.2 | for event loop policy |
 
 ## Installation
 You can [download asyncurl executable](https://github.com/hidden-function/asyncurl/releases).
@@ -39,7 +38,7 @@ Default worker's count is 2. you can change it if you want.
 ac_fetch.worker = 3
 ```
 
-and you can fetch urls.
+and you can request urls.
 ```python
 urls = [
   "http://localhost",
@@ -48,11 +47,19 @@ urls = [
 ]
 ac_fetch.parallel(urls)
 ```
-`parallel_fetch` function which can return list of request class. just like this.
+List of url will be added to `asyncio.Queue`. so if you want better performance, do like this.
+```python
+for x in range(3):
+    ac_fetch.queue.put_nowait('http://localhost')
+
+ac_fetch.parallel()
+```
+
+`parallel` function will return itself. you can get results like this.
 ```python
 ac_fetch.parallel(urls).results
 ```
-The function's the order of result is nonsequential
+The function's the order of result is nonsequential. and the results return that list of `<requests.Response>`.
 
 ## Examples
 ```python
