@@ -1,8 +1,6 @@
 import collections
 import requests
 from asyncurl.base import AsyncURLBase, asyncio, uvloop
-import sys
-from memory_profiler import profile
 
 class AsyncURLFetch(AsyncURLBase):
     def __init__(self):
