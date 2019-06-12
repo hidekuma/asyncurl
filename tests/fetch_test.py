@@ -4,9 +4,7 @@ from collections.abc import Iterable
 from asyncurl.fetch import AsyncURLFetch
 
 TEST_URLS = [
-    'http://localhost',
-    'http://localhost',
-    'http://localhost',
+    'http://github.com',
 ]
 
 class AsyncURLFetchTest(unittest.TestCase):
