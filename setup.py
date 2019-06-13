@@ -14,7 +14,7 @@ setup(name='asyncurl',
       keywords=['async', 'asynchronous', 'requests', 'cURL', 'curl', 'crawling'],
       install_requires=[
         'asyncio>=3.4.3',
-        'requests=2.22.0',
+        'requests>=2.22.0',
         'uvloop>=0.12.2'
       ],
       python_requires = '>=3.6',
