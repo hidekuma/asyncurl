@@ -47,19 +47,38 @@ urls = [
 ]
 ac_fetch.parallel(urls)
 ```
-List of url will be added to `asyncio.Queue`. so if you want better performance, do like this.
+
+List of url will be added to `asyncio.Queue`. so do like this if you want better performance.
 ```python
-for x in range(3):
+for x in range(2):
     ac_fetch.queue.put_nowait('http://localhost')
 
 ac_fetch.parallel()
 ```
 
+and AsyncURL can change request method and else.
+```python
+from asyncurl.session import AsyncURLSession
+from asyncurl.fetch import AsyncURLFetch
+
+ac_fetch = AsyncURLFetch()
+
+for x in range(2):
+    session = AsyncURLSession()
+    session.fetch_url = 'http://localhost' 
+    session.fetch_method = 'POST'
+    session.headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
+    ac_fetch.queue.put_nowait(session)
+
+ac_fetch.parallel()
+```
+`AsyncURLSession` is Inheritance of `requests.Session`.
+
 `parallel` function will return itself. you can get results like this.
 ```python
 ac_fetch.parallel(urls).results
 ```
-The function's the order of result is nonsequential. and the results return that list of `<requests.Response>`.
+The function's order of result is nonsequential. and it will return list of `<requests.Response>`.
 
 ## Examples
 ```python
@@ -72,13 +91,13 @@ print('-------- [return results] ----------')
 print(ac_fetch.parallel(urls).results)
 
 >>>
--------- [with callback] ----------
-with callback : <Future finished result=<Response [403]>>
-with callback : <Future finished result=<Response [403]>>
-with callback : <Future finished result=<Response [403]>>
-
--------- [return results] ----------
-[<Response [403]>, <Response [403]>, <Response [403]>]
+>>> --- [with callback] ----------
+>>> with callback : <Future finished result=<Response [403]>>
+>>> with callback : <Future finished result=<Response [403]>>
+>>> with callback : <Future finished result=<Response [403]>>
+>>> 
+>>> -------- [return results] ----------
+>>> [<Response [403]>, <Response [403]>, <Response [403]>]
 ```
 
 [License](LICENSE)
