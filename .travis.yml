@@ -1,11 +1,18 @@
 language: python
 python:
-  - "3.6"
-  - "3.7"
+- '3.6'
+- '3.7'
 install:
-  - pip install setuptools --upgrade
-  - python setup.py install
+- pip install setuptools --upgrade
+- python setup.py install
 script:
-  - python -m unittest tests/*.py
+- python -m unittest tests/*.py
 notifications:
   email: false
+deploy:
+  provider: pypi
+  user: hidekuma
+  on:
+    tags: true
+  password:
+    secure: XmbE9qFIW3bFETdnFVNe4rwDlBjLLkFJ15I3n1/24Ndvy0xTcZStTd7y1LTB0yrOBCuTpksJJYz4pY7Q5/zw8O/q78hYNcov66UTWuxXBmAO2G2iFpGXhiAQsV1YQ2EvrHTbuw7lnCrCUOfT/Esx+yFscl9mrlyUgzwHllkSD1wpuHKTd5B5qKHznEe7T3A/0Hu+jiNgG+faBOAT2rGy2uF3wOgrGD9clPzUMyUFXYaK+ih532KaJWvJx4Ha15/6E62QmqnAnHILT1jwdGkgFfeOCKB5ki3k7j/eL9ssxzGP3Glo9VDAaPwusNIvNvwaG6O3jk9k9uPNWeAJF4AQmgSJtokZOT+49TPPWIPjFZtRF00BGxFsB4WyxT5v3MbSskaqm6O+asiC/yzd9LawDqpmbfH+Cd3XWf/35SUy3aI4/Mvg2UIOtuHu7WaaaFVN5JKIzJzCTJso0CwUgL1sS4FeLAY5R8NJYlWZ92MKJi0qnETSRg6Zp01jf4MN3h8+tKpeORtZC5gzVjOJqpCnDC7Q0MC6ajACKfX97E8zkakNq+BRpTdcq2ABmR0+kBbVmMXmmJwzwdgHaRAb36SqlhqOiQhdmQ/zWSfk/OsBReh4q9XkXUbUVNE5uyJOpEwkM8mgmDAObdZU+M1NcBDNvxrPMHIIGQ3F+AahRFxtu8M=
