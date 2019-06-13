@@ -9,10 +9,10 @@ script:
 - python -m unittest tests/*.py
 notifications:
   email: false
-deploy:
-  provider: pypi
-  user: hidekuma
-  skip_existing: true
-  distributions: sdist bdist_wheel
-  password:
-    secure: Kd4S98RlxXWVXXyIm4IUAmgnixZuwidOB8Quj45pJBf2rb496RxXwOnyEaioeX0bgggX9HiFK1dAFQlKpyfGzfLQFBPiirSv7+se4ZrmwIO5h7gCbl633Eo5AjPjbFFXo9UEv6ZkepaDAS8So946fsFU0H9lv9PVNszq972Lmw3XpHkpiU81rv19laXQll3kJZjVgFfbQPrrjg+zueV7Du2tA5xLnP1onaUQR8VQ7VIwGe7CSBJGhnrLr6iE00BzGGbEDfsNqLKWQdhHwiqVvV+0RwuiSBzrFd6hnHmmYSYRB3mfZZ9Q5AANHcR+RhlkK4CkbMbDVyT0A94gLvIavg12gV8p05boF+/1VFUKmKrVcv+frHUiMvqV5kVNP75BLquLHODZBlk+Qf6XFnUUc9o4j1jKqecyorpW7O/M2Mg9IHDADofbw3rGeQPinNEY/9YMFKM+yOPBQsYIXjJiYXCDWByGfurPxURD6pF+n62J4kpm/+NZVv8Y267iUupUBYQdwHUuKMGjam29ukw0RLzO+IrzULvar05jO5s2z8u+eYY/KmPthIXBqkeOQQsTFYgHINRGt20Uppc01YC01/w2S3lh3aRAOpcjE5ttE3ZW90yDigt9NqDhuRH4lorz7LgRaNUHXyL9nMTm/SjPdIoO/VzwriaEwUvcy+Cik8A=
+  #deploy:
+  #  provider: pypi
+  #  user: hidekuma
+  #  skip_existing: true
+  #  distributions: sdist bdist_wheel
+  #  password:
+  #    secure: Kd4S98RlxXWVXXyIm4IUAmgnixZuwidOB8Quj45pJBf2rb496RxXwOnyEaioeX0bgggX9HiFK1dAFQlKpyfGzfLQFBPiirSv7+se4ZrmwIO5h7gCbl633Eo5AjPjbFFXo9UEv6ZkepaDAS8So946fsFU0H9lv9PVNszq972Lmw3XpHkpiU81rv19laXQll3kJZjVgFfbQPrrjg+zueV7Du2tA5xLnP1onaUQR8VQ7VIwGe7CSBJGhnrLr6iE00BzGGbEDfsNqLKWQdhHwiqVvV+0RwuiSBzrFd6hnHmmYSYRB3mfZZ9Q5AANHcR+RhlkK4CkbMbDVyT0A94gLvIavg12gV8p05boF+/1VFUKmKrVcv+frHUiMvqV5kVNP75BLquLHODZBlk+Qf6XFnUUc9o4j1jKqecyorpW7O/M2Mg9IHDADofbw3rGeQPinNEY/9YMFKM+yOPBQsYIXjJiYXCDWByGfurPxURD6pF+n62J4kpm/+NZVv8Y267iUupUBYQdwHUuKMGjam29ukw0RLzO+IrzULvar05jO5s2z8u+eYY/KmPthIXBqkeOQQsTFYgHINRGt20Uppc01YC01/w2S3lh3aRAOpcjE5ttE3ZW90yDigt9NqDhuRH4lorz7LgRaNUHXyL9nMTm/SjPdIoO/VzwriaEwUvcy+Cik8A=
