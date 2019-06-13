@@ -1,6 +1,6 @@
 import collections
-import requests
 from asyncurl.base import AsyncURLBase, asyncio, uvloop
+from asyncurl.session import AsyncURLSession
 
 class AsyncURLFetch(AsyncURLBase):
     def __init__(self):
@@ -18,13 +18,26 @@ class AsyncURLFetch(AsyncURLBase):
         - call by _queue_execution()
         """
         while not self.queue.empty():
-            url = await self.queue.get()
-            future = loop.run_in_executor(None, requests.get, url)
+            session = await self.queue.get()
+
+            if not isinstance(session, AsyncURLSession):
+                session = AsyncURLSession(fetch_url=session)
+
+            if session.fetch_method == 'POST':
+                future = loop.run_in_executor(None, session.post, session.fetch_url)
+            elif session.fetch_method == 'PUT':
+                future = loop.run_in_executor(None, session.put, session.fetch_url)
+            elif session.fetch_method == 'DELETE':
+                future = loop.run_in_executor(None, session.DELETE, session.fetch_url)
+            else:
+                future = loop.run_in_executor(None, session.get, session.fetch_url)
+
             if callback:
                 future.add_done_callback(callback)
             else:
                 future.add_done_callback(self._store_result)
             await future
+            session.close()
 
     async def _queue_execution(self, arg_urls, *, callback):
         """
@@ -55,7 +68,7 @@ class AsyncURLFetch(AsyncURLBase):
     #    reqs = [self._fetch(url, callback) for url in arg_urls]
     #    return await asyncio.wait(reqs)
 
-    def parallel(self, urls=[], *, callback=None, queue=False):
+    def parallel(self, urls=[], *, callback=None):
         """
         - [ENTRYPOINT]
         - validation
