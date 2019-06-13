@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='asyncurl',
-      version='0.1.6',
+      version='0.1.7',
       url='https://github.com/hidden-function/asyncurl',
       license='MIT',
       author='Hidekuma',
@@ -14,7 +14,7 @@ setup(name='asyncurl',
       keywords=['async', 'asynchronous', 'requests', 'cURL', 'curl', 'crawling'],
       install_requires=[
         'asyncio>=3.4.3',
-        'requests>=2.22.0',
+        'requests=2.22.0',
         'uvloop>=0.12.2'
       ],
       python_requires = '>=3.6',
