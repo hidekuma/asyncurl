@@ -72,7 +72,7 @@ for x in range(2):
 
 ac_fetch.parallel()
 ```
-`AsyncURLSession` is Inheritance of `requests.Session`.
+`AsyncURLSession` is Inheritance of `<requests.Session>`.
 
 `parallel` function will return itself. you can get results like this.
 ```python
