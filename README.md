@@ -91,7 +91,7 @@ print('-------- [return results] ----------')
 print(ac_fetch.parallel(urls).results)
 
 >>>
->>> --- [with callback] ----------
+>>> -------- [with callback] ----------
 >>> with callback : <Future finished result=<Response [403]>>
 >>> with callback : <Future finished result=<Response [403]>>
 >>> with callback : <Future finished result=<Response [403]>>
