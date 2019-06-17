@@ -37,7 +37,7 @@ Default worker's count is 2. you can change it if you want.
 ac_fetch.worker = 3
 ```
 
-and you can put urls to `<AsyncURl.queue>`.
+and you can put urls to `<AsyncURL.queue>`.
 ```python
 for x in range(2):
     ac_fetch.queue.put_nowait('http://localhost')
@@ -90,6 +90,9 @@ equals to `<requests.Request>`
 
 ## Examples
 ```python
+for x in range(3):
+    ac_fetch.queue.put_nowait('http://localhost')
+    
 # case.1) with callback
 print('[with callback]')
 ac_fetch.parallel(callback=lambda x: print('with callback : {0}'.format(x)))
