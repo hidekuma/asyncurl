@@ -93,13 +93,14 @@ ac_fetch.parallel(urls, callback=lambda x: print('with callback : {0}'.format(x)
 print('[return results]')
 print(ac_fetch.parallel(urls).results)
 
->>> [with callback]
->>> with callback : <Future finished result=<Response [403]>>
->>> with callback : <Future finished result=<Response [403]>>
->>> with callback : <Future finished result=<Response [403]>>
->>> 
->>> [return results]
->>> [<Response [403]>, <Response [403]>, <Response [403]>]
+>>>
+[with callback]
+with callback : <Future finished result=<Response [403]>>
+with callback : <Future finished result=<Response [403]>>
+with callback : <Future finished result=<Response [403]>>
+
+[return results]
+[<Response [403]>, <Response [403]>, <Response [403]>]
 ```
 
 [License](LICENSE)
