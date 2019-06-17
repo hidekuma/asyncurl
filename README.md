@@ -1,5 +1,5 @@
 # asyncurl [![Build Status](https://travis-ci.org/hidden-function/asyncurl.svg?branch=master)](https://travis-ci.org/hidden-function/asyncurl)
-for Asynchronous cURL Requests using python, which is inspired by this benchmark([KR](https://hidekuma.github.io/python/uvloop/), [EN](https://magic.io/blog/uvloop-blazing-fast-python-networking/))
+Asynchronous cURL Requests using python, which is inspired by this benchmark([KR](https://hidekuma.github.io/python/uvloop/), [EN](https://magic.io/blog/uvloop-blazing-fast-python-networking/))
 
 <img src="https://raw.githubusercontent.com/hidden-function/i/master/asyncurl.png" width="50%" alt="asyncurl-logo"> 
 
@@ -25,6 +25,7 @@ pip install asyncurl
 ```
 
 ## Usage
+Import AsyncURL.
 ```python
 from asyncurl.fetch import AsyncURLFetch
 
@@ -43,7 +44,7 @@ for x in range(2):
 
 ac_fetch.parallel()
 ```
-then call `parallel()`. The fucntion fetch urls using `<requests>`(the only Non-GMO HTTP library for Python).
+Then call `parallel()`. The fucntion fetch urls using `<requests>`(HTTP library for Python).
 
 and AsyncURL can change `<requests>`'s method and else properties.
 ```python
@@ -55,7 +56,6 @@ ac_fetch = AsyncURLFetch()
 for x in range(2):
     headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
     session = AsyncURLSession('GET', 'http://localhost', headers=headers)
-    ac_fetch.queue.put_nowait(session)
     ac_fetch.queue.put_nowait(session)
 
 ac_fetch.parallel()
@@ -90,7 +90,8 @@ equals to `<requests.Request>`
 ## Examples
 ```python
 for x in range(3):
-    ac_fetch.queue.put_nowait('http://localhost')
+    session = AsyncURLSession('GET', 'http://localhost', headers=headers)
+    ac_fetch.queue.put_nowait(session)
     
 # case.1) with callback
 print('[with callback]')
