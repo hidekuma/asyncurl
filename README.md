@@ -90,7 +90,7 @@ equals to `<requests.Request>`
 ## Examples
 ```python
 for x in range(3):
-    session = AsyncURLSession('GET', 'http://localhost', headers=headers)
+    session = AsyncURLSession('GET', 'http://localhost')
     ac_fetch.queue.put_nowait(session)
     
 # case.1) with callback
