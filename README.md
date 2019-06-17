@@ -37,25 +37,14 @@ Default worker's count is 2. you can change it if you want.
 ac_fetch.worker = 3
 ```
 
-and you can call `parallel()` that it fetch urls using `<requests>'(the only Non-GMO HTTP library for Python).
-```python
-urls = [
-  "http://localhost",
-  "http://localhost",
-  "http://localhost"
-]
-ac_fetch.parallel(urls)
-```
-
-List of url will be added to `asyncio.Queue`, which is spend time of `O(n)`. so if you want better performance, don't send list of url to `parallel()`. 
-
-Recommended solution is:
+and you can put urls to `<AsyncURl.queue>`.
 ```python
 for x in range(2):
     ac_fetch.queue.put_nowait('http://localhost')
 
 ac_fetch.parallel()
 ```
+then call `parallel()`. The fucntion fetch urls using `<requests>`(the only Non-GMO HTTP library for Python).
 
 and AsyncURL can change `<requests>`'s method and else properties.
 ```python
@@ -65,10 +54,9 @@ from asyncurl.fetch import AsyncURLFetch
 ac_fetch = AsyncURLFetch()
 
 for x in range(2):
-    session = AsyncURLSession()
-    session.fetch_url = 'http://localhost' 
-    session.fetch_method = 'POST'
-    session.headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
+    headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.102 Safari/537.36'}
+    session = AsyncURLSession('GET', 'http://localhost', headers=headers)
+    ac_fetch.queue.put_nowait(session)
     ac_fetch.queue.put_nowait(session)
 
 ac_fetch.parallel()
@@ -77,9 +65,25 @@ ac_fetch.parallel()
 
 `parallel()` will return `<AsncURLFetch>`, and it can show results to you.
 
+### else properties
+- params=None
+- data=None
+- headers=None
+- cookies=None
+- files=None
+- auth=None
+- timeout=None
+- allow_redirects=True
+- proxies=None
+- hooks=None
+- stream=None
+- verify=None
+- cert=None
+- json=None
+
 Show results:
 ```python
-ac_fetch.parallel(urls).results
+ac_fetch.parallel().results
 ```
 The order of result is nonsequential. and it will return list of `<requests.Response>`.
 
@@ -87,11 +91,11 @@ The order of result is nonsequential. and it will return list of `<requests.Resp
 ```python
 # case.1) with callback
 print('[with callback]')
-ac_fetch.parallel(urls, callback=lambda x: print('with callback : {0}'.format(x)))
+ac_fetch.parallel(callback=lambda x: print('with callback : {0}'.format(x)))
 
 # case.2) return results
 print('[return results]')
-print(ac_fetch.parallel(urls).results)
+print(ac_fetch.parallel().results)
 
 >>>
 [with callback]
