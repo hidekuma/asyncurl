@@ -65,6 +65,12 @@ ac_fetch.parallel()
 
 `parallel()` will return `<AsncURLFetch>`, and it can show results to you.
 
+Show results:
+```python
+ac_fetch.parallel().results
+```
+The order of result is nonsequential. and it will return list of `<requests.Response>`.
+
 ### AsyncURLSession's properties
 equals to `<requests.Request>`
 - params=None
@@ -81,12 +87,6 @@ equals to `<requests.Request>`
 - verify=None
 - cert=None
 - json=None
-
-Show results:
-```python
-ac_fetch.parallel().results
-```
-The order of result is nonsequential. and it will return list of `<requests.Response>`.
 
 ## Examples
 ```python
