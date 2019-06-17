@@ -8,16 +8,16 @@ Asynchronous cURL Requests
 python >= 3.6
 
 ## Dependencies
-asyncurl project consists of the following packages:
+AsyncURL project consists of the following packages:
 
 | Package  | Version  | Description           |
 | :-:      | :-:      | :-:                   |
-| asyncio  | >=3.4.3  | Asynchronous          |
+| asyncio  | >=3.4.3  | for Asynchronous      |
 | requests | >=2.22.0 | pycurl substitutes    |
 | uvloop   | >=0.12.2 | for event loop policy |
 
 ## Installation
-You can [download asyncurl executable](https://github.com/hidden-function/asyncurl/releases).
+You can [download asyncurl executable](https://github.com/hidden-function/asyncurl/releases) and [binary distributions from PyPI](https://pypi.org/project/asyncurl/).
 
 ### Using pip
 ```bash
@@ -25,8 +25,7 @@ pip install asyncurl
 ```
 
 ## Usage
-if you want asyncurl, you have to import like this.
-
+How to import AsnycURL:
 ```python
 from asyncurl.fetch import AsyncURLFetch
 
@@ -38,7 +37,7 @@ Default worker's count is 2. you can change it if you want.
 ac_fetch.worker = 3
 ```
 
-and you can request urls.
+and you can call `parallel()` that fetch urls using `<requests>'(the only Non-GMO HTTP library for Python).
 ```python
 urls = [
   "http://localhost",
@@ -48,7 +47,9 @@ urls = [
 ac_fetch.parallel(urls)
 ```
 
-List of url will be added to `asyncio.Queue`. so do like this if you want better performance.
+List of url will be added to `asyncio.Queue`, which is spend time of `O(n)`. so if you want better performance, don't send list of url to `parallel()`. 
+
+Recommended solution is:
 ```python
 for x in range(2):
     ac_fetch.queue.put_nowait('http://localhost')
@@ -56,7 +57,7 @@ for x in range(2):
 ac_fetch.parallel()
 ```
 
-and AsyncURL can change request method and else.
+and AsyncURL can change `<requests>`'s method and else properties.
 ```python
 from asyncurl.session import AsyncURLSession
 from asyncurl.fetch import AsyncURLFetch
@@ -72,31 +73,32 @@ for x in range(2):
 
 ac_fetch.parallel()
 ```
-`AsyncURLSession` is Inheritance of `<requests.Session>`.
+`AsyncURLSession` is inheritance of `<requests.Session>`.
 
-`parallel` function will return itself. you can get results like this.
+`parallel()` will return `<AsncURLFetch>`, and it can show results to you.
+
+Show results:
 ```python
 ac_fetch.parallel(urls).results
 ```
-The function's order of result is nonsequential. and it will return list of `<requests.Response>`.
+The order of result is nonsequential. and it will return list of `<requests.Response>`.
 
 ## Examples
 ```python
 # case.1) with callback
-print('-------- [with callback] ----------')
+print('[with callback]')
 ac_fetch.parallel(urls, callback=lambda x: print('with callback : {0}'.format(x)))
 
 # case.2) return results
-print('-------- [return results] ----------')
+print('[return results]')
 print(ac_fetch.parallel(urls).results)
 
->>>
->>> -------- [with callback] ----------
+>>> [with callback]
 >>> with callback : <Future finished result=<Response [403]>>
 >>> with callback : <Future finished result=<Response [403]>>
 >>> with callback : <Future finished result=<Response [403]>>
 >>> 
->>> -------- [return results] ----------
+>>> [return results]
 >>> [<Response [403]>, <Response [403]>, <Response [403]>]
 ```
 
