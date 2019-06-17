@@ -65,7 +65,8 @@ ac_fetch.parallel()
 
 `parallel()` will return `<AsncURLFetch>`, and it can show results to you.
 
-### else properties
+### AsyncURLSession's properties
+== <requests.Request>
 - params=None
 - data=None
 - headers=None
