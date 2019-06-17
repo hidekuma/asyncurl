@@ -37,7 +37,7 @@ Default worker's count is 2. you can change it if you want.
 ac_fetch.worker = 3
 ```
 
-and you can call `parallel()` that fetch urls using `<requests>'(the only Non-GMO HTTP library for Python).
+and you can call `parallel()` that it fetch urls using `<requests>'(the only Non-GMO HTTP library for Python).
 ```python
 urls = [
   "http://localhost",
