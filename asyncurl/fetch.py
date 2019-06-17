@@ -21,16 +21,9 @@ class AsyncURLFetch(AsyncURLBase):
             session = await self.queue.get()
 
             if not isinstance(session, AsyncURLSession):
-                session = AsyncURLSession(fetch_url=session)
+                session = AsyncURLSession()
 
-            if session.fetch_method == 'POST':
-                future = loop.run_in_executor(None, session.post, session.fetch_url)
-            elif session.fetch_method == 'PUT':
-                future = loop.run_in_executor(None, session.put, session.fetch_url)
-            elif session.fetch_method == 'DELETE':
-                future = loop.run_in_executor(None, session.DELETE, session.fetch_url)
-            else:
-                future = loop.run_in_executor(None, session.get, session.fetch_url)
+            future = loop.run_in_executor(None, session.send)
 
             if callback:
                 future.add_done_callback(callback)
@@ -39,15 +32,15 @@ class AsyncURLFetch(AsyncURLBase):
             await future
             session.close()
 
-    async def _queue_execution(self, arg_urls, *, callback):
+    async def _queue_execution(self, *, callback):
         """
         - call by parallel_fetch()
         """
         loop = asyncio.get_event_loop()
 
-        if arg_urls:
-            for url in arg_urls:
-                self.queue.put_nowait(url)
+        #if arg_urls:
+        #    for url in arg_urls:
+        #        self.queue.put_nowait(url)
 
         tasks = [self._queue_fetch(loop, callback) for i in range(self._worker)]
         return await asyncio.wait(tasks)
@@ -68,17 +61,17 @@ class AsyncURLFetch(AsyncURLBase):
     #    reqs = [self._fetch(url, callback) for url in arg_urls]
     #    return await asyncio.wait(reqs)
 
-    def parallel(self, urls=[], *, callback=None):
+    def parallel(self, *, callback=None):
         """
         - [ENTRYPOINT]
         - validation
         - the order of result is nonsequential
         """
-        self._validate(urls)
+        #self._validate(urls)
         self._results.clear() # RESET results
 
         loop = asyncio.get_event_loop()
 
-        loop.run_until_complete(self._queue_execution(urls, callback=callback))
+        loop.run_until_complete(self._queue_execution(callback=callback))
 
         return self
