@@ -25,7 +25,6 @@ pip install asyncurl
 ```
 
 ## Usage
-How to import AsnycURL:
 ```python
 from asyncurl.fetch import AsyncURLFetch
 
