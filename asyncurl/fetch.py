@@ -30,7 +30,6 @@ class AsyncURLFetch(AsyncURLBase):
             else:
                 future.add_done_callback(self._store_result)
             await future
-            session.close()
 
     async def _queue_execution(self, *, callback):
         """
@@ -72,6 +71,9 @@ class AsyncURLFetch(AsyncURLBase):
 
         loop = asyncio.get_event_loop()
 
-        loop.run_until_complete(self._queue_execution(callback=callback))
+        try:
+            loop.run_until_complete(self._queue_execution(callback=callback))
+        finally:
+            loop.close()
 
         return self
