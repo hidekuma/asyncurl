@@ -1,4 +1,4 @@
-# asyncurl [![Build Status](https://travis-ci.org/hidden-function/asyncurl.svg?branch=master)](https://travis-ci.org/hidden-function/asyncurl)
+# asyncurl [![Build Status](https://travis-ci.org/hidekuma/asyncurl.svg?branch=master)](https://travis-ci.org/hidekuma/asyncurl)
 Asynchronous cURL Requests using python, which is inspired by this benchmark([KR](https://hidekuma.github.io/python/uvloop/), [EN](https://magic.io/blog/uvloop-blazing-fast-python-networking/)).
 
 <img src="https://raw.githubusercontent.com/hidden-function/i/master/asyncurl.png" width="50%" alt="asyncurl-logo"> 
